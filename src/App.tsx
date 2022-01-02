@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch } from 'react-router-dom'
+import { map } from 'lodash'
+import { GlobalStyle, PageContainer } from './static/css'
+import DefaultMenu from './components/app/layout'
+import routes from './routes'
+import Routes from './components/utils/routes'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle/>
+      <DefaultMenu>
+        <PageContainer>
+          <Switch>
+            {map(routes, (route, index) => {
+              <Routes key={index} {...route}/>
+            })}
+          </Switch>
+        </PageContainer>
+      </DefaultMenu>
+    </>
   );
 }
 
